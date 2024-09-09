@@ -25,7 +25,7 @@ Este é um projeto totalmente livre que aceita contribuições via pull requests
 4. Usar um emoji no início da mensagem de commit representando sobre o commit.
 
 ## Padrões de Commits 📜
-Este projeto segue os [padrões de commit](https://github.com/iuricode/padroes-de-commits/tree/main). Utilize os seguintes tipos de commit nas suas mensagens:Tipos de Commit
+Este projeto segue os [padrões de commit](https://github.com/iuricode/padroes-de-commits/tree/main). Utilize os seguintes tipos de commit nas suas mensagens:
 
 - 💄**feat:** Adicionar nova funcionalidade.
 - 🐛**fix:** Correção de bugs.
