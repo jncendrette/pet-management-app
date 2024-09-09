@@ -33,3 +33,8 @@ Este é um projeto totalmente livre que aceita contribuições via pull requests
 - 📚**docs:** Mudanças na documentação.
 - 👌**style:** Alterações de formatação (espaços, ponto e vírgula, etc.).
 - ♻️**refactor:** Refatoração de código.
+
+## Regras de Pull Request 
+
+- Escreva descrições claras para suas mudanças.
+- Certifique-se de linkar issues relacionadas.
