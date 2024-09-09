@@ -18,8 +18,6 @@ Este é um projeto totalmente livre que aceita contribuições via pull requests
     ```bash
     git push origin feature/nova-funcionalidade
     ```
-5. Abra um Pull Request no GitHub.
-
 ## Recomendação 🎉
 1. Adicione um tipo consistente com o título do conteúdo.
 2. Recomendamos que na primeira linha deve ter no máximo 4 palavras.
@@ -36,5 +34,6 @@ Este é um projeto totalmente livre que aceita contribuições via pull requests
 
 ## Regras de Pull Request 
 
+- No GitHub, vá até o repositório original e clique em "Compare & pull request". Descreva suas mudanças e submeta o PR para revisão.
 - Escreva descrições claras para suas mudanças.
 - Certifique-se de linkar issues relacionadas.
