@@ -19,3 +19,9 @@ Este é um projeto totalmente livre que aceita contribuições via pull requests
     git push origin feature/nova-funcionalidade
     ```
 5. Abra um Pull Request no GitHub.
+
+## Recomendação 🎉
+1. Adicione um tipo consistente com o título do conteúdo.
+2. Recomendamos que na primeira linha deve ter no máximo 4 palavras.
+3. Para descrever com detalhes, usar a descrição do commit.
+4. Usar um emoji no início da mensagem de commit representando sobre o commit.
