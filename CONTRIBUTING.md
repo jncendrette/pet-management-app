@@ -25,3 +25,11 @@ Este é um projeto totalmente livre que aceita contribuições via pull requests
 2. Recomendamos que na primeira linha deve ter no máximo 4 palavras.
 3. Para descrever com detalhes, usar a descrição do commit.
 4. Usar um emoji no início da mensagem de commit representando sobre o commit.
+
+## Tipos de Commit
+
+- 💄**feat:** Adicionar nova funcionalidade.
+- 🐛**fix:** Correção de bugs.
+- 📚**docs:** Mudanças na documentação.
+- 👌**style:** Alterações de formatação (espaços, ponto e vírgula, etc.).
+- ♻️**refactor:** Refatoração de código.
