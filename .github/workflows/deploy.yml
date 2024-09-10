@@ -17,38 +17,28 @@ jobs:
           uses: actions/setup-python@v3
           with:
             python-version: '3.x'
-  
-        - name: Instalando Dependencias
+
+        - name: Instalando as Dependências
           run: |
             python -m pip install --upgrade pip
             pip install -r requirements.txt
   
-        - name: Configurando Credenciais EC2
-          run: |
-            echo "${{ secrets.EC2_PRIVATE_KEY }}" > /tmp/ec2-keypair.pem
-            chmod 600 /tmp/ec2-keypair.pem
-    
-        - name: Configurando credenciais de User
+        - name: Deploy Amazon EC2
           env:
             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            AWS_REGION: 'us-east-1'
+           AWS_REGION: 'us-east-1'
+           EC2_PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
           run: |
-            
-            echo "Instalando o Git"
-            sudo yum install git -y
-            git pull origin main
-            
-            echo "Criando ambiente virtual python"
-            python3 -m venv venv
-            source venv/bin/activate
-
-            echo "Instalando as dependências do projeto"
-            pip install -r requirements.txt
-
-            echo "Iniciando Gunicorn para servir o Flask App...""
-            nohup gunicorn --bind 0.0.0.0:5000 app:app > gunicorn.log 2>&1 & disown
-            
-            # Mensagem de Sucesso do Deploy
-            echo "Deploy completado com sucessso!"
+            echo "${{ secrets.EC2_PRIVATE_KEY }}" > /tmp/ec2-keypair.pem
+            chmod 600 /tmp/ec2-keypair.pem
+            ssh -i /tmp/ec2-keypair.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_IP }} << EOF
+              cd /home/ec2-user/app
+              source /home/ec2-user/myenv/bin/activate
+              pip install -r requirements.txt
+              git pull origin main
+              source /home/ec2-user/myenv/bin/activate
+              pip install -r requirements.txt
+              fuser -k 5000/tcp || true
+              nohup gunicorn --bind 0.0.0.0:5000 app:app > gunicorn.log 2>&1 &
             EOF
