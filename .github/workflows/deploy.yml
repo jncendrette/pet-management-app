@@ -23,11 +23,11 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt
   
-        - name: Instalar SSH Key
-          uses: webfactory/ssh-agent@v0.5.3
-          with:
-            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-  
+        - name: Configurando Credenciais EC2
+          run: |
+            echo "${{ secrets.EC2_PRIVATE_KEY }}" > /tmp/ec2-keypair.pem
+            chmod 600 /tmp/ec2-keypair.pem
+    
         - name: Deploy no Amazon Linux EC2
           run: |
             ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_IP }} << 'EOF'
