@@ -4,13 +4,12 @@ Este é um aplicativo simples desenvolvido em Python para gerenciar o cadastro d
 
 ## Funcionalidades
 
-- Cadastro de pets com nome, idade e espécie.
+- Cadastro de pets com nome, idade, peso e tipo.
 - Listagem de todos os pets cadastrados.
 
 ## Requisitos
 
 - Python 3.x
-- SQLite3
 
 ## Instalação
 
@@ -30,4 +29,4 @@ Este é um aplicativo simples desenvolvido em Python para gerenciar o cadastro d
 ## Como executar
 
 ```bash
-python3 src/main.py
+python3 app.py
