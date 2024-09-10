@@ -1,6 +1,14 @@
 name: Python package
 
-on: [push]
+on:
+    push:
+      branches:
+        - release
+      # paths-ignore:
+      #   - 'docs/**'
+      #   - 'README.md'
+      #   - 'README_EN.md'
+      #   - 'LICENSE'
 
 jobs:
   build:
