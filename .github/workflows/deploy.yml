@@ -1,3 +1,5 @@
+name: Amazon Linux EC2
+
 on: [push]
       # paths-ignore:
       #   - 'README.md'
