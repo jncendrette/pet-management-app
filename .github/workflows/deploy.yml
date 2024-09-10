@@ -5,7 +5,7 @@ on:
     branches:
       #- main
       - release
-      - develop
+      #- develop
       # paths-ignore:
       #   - 'README.md'
       #   - 'LICENSE.md'
