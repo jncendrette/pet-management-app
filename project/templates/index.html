@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    
+    <h1>Lista de Pets Cadastrados</h1>
+    <ul>
+        {% for pet in pets %}
+        <li>{{ <pet.nome }} - {{ pet.idade }} anos - {{ pet.peso }} kg - Tipo: {{ pet.tipo }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('add_pet') }}">Adicionar Novo Pet</a>
 </body>
 </html>
