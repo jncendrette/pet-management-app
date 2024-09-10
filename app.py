@@ -20,7 +20,7 @@ def add_pet():
 
         # Armazenar os dados do pet na lista
         pets.append({
-            'peso': nome,
+            'nome': nome,
             'idade': idade,
             'peso': peso,
             'tipo': tipo
