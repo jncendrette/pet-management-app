@@ -29,21 +29,58 @@ jobs:
             pip install -r requirements.txt
   
         - name: Deploy Amazon EC2
-          env:
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            AWS_REGION: 'us-east-1'
-            EC2_PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
           run: |
-            echo "${{ secrets.EC2_PRIVATE_KEY }}" > /tmp/ec2-keypair.pem
-            chmod 600 /tmp/ec2-keypair.pem
-            ssh -i /tmp/ec2-keypair.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_IP }} << EOF
-              cd /home/ec2-user/app
-              source /home/ec2-user/myenv/bin/activate
-              pip install -r requirements.txt
-              git pull origin main
-              source /home/ec2-user/myenv/bin/activate
-              pip install -r requirements.txt
-              fuser -k 5000/tcp || true
-              nohup gunicorn --bind 0.0.0.0:5000 app:app > gunicorn.log 2>&1 &
-            EOF
+              echo "${{ secrets.EC2_PRIVATE_KEY }}" > /tmp/ec2-keypair.pem
+              chmod 600 /tmp/ec2-keypair.pem
+    
+        - name: SSH into EC2 and Deploy
+          env:
+              AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+              AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+              AWS_REGION: 'us-east-1'
+          run: |
+              ssh -i /tmp/ec2-keypair.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_IP }} << EOF
+                # Remove the /home/ec2-user/app directory if it exists
+                if [ -d "/home/ec2-user/app" ]; then
+                  echo "Removing existing /home/ec2-user/app directory..."
+                  sudo rm -rf /home/ec2-user/app
+                fi
+    
+                # Recreate the /home/ec2-user/app directory
+                mkdir -p /home/ec2-user/app
+                cd /home/ec2-user/app
+    
+                # Install git if not already installed
+                sudo yum install -y git || sudo apt-get install -y git
+    
+                # Clone the repository again
+                git clone https://github.com/jncendrette/pet-management-app.git .
+    
+                # Ensure virtual environment exists, create if not
+                if [ ! -d "/home/ec2-user/myenv" ]; then
+                  python3 -m venv /home/ec2-user/myenv
+                fi
+    
+                # Activate virtual environment
+                . /home/ec2-user/myenv/bin/activate
+    
+                # Install requirements, including Flask
+                if [ -f requirements.txt ]; then
+                  pip install --upgrade pip
+                  pip install -r requirements.txt
+                else
+                  echo "requirements.txt file not found!"
+                fi
+    
+                # Install Flask explicitly if missing from requirements.txt
+                pip install flask
+    
+                # Stop any existing Gunicorn process on port 5000
+                sudo fuser -k 5000/tcp || true
+    
+                # Start Gunicorn to serve the Flask app
+                nohup gunicorn --bind 0.0.0.0:5000 app:app > gunicorn.log 2>&1 & disown
+    
+                # Log message for successful deployment
+                echo "Deploy concluído com sucesso!"
+              EOF
