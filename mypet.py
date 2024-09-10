@@ -11,6 +11,7 @@ def coletar_nome_pet():
     return nome
 
     # Coleta da idade do pet, garantindo que seja um número inteiro
+def coletar_idade_pet():
     while True:
         try:
             idade = int(input("Idade do pet (em anos): "))
