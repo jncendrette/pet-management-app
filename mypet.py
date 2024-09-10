@@ -1,4 +1,4 @@
-# Função para coletar informações sobre o pet
+# Coleta do nome do pet
 def coletar_nome_pet():
     print("Por favor, insira as informações sobre seu pet.")
 
@@ -33,6 +33,18 @@ def coletar_peso_pet():
                 break
         except ValueError:
             print("Por favor, insira um número válido para o peso.")
+
+# Coleta o tipo do pet
+def coletar_tipo_pet():
+    tipos_validos = ["Cachorro", "Gato", "Pássaro", "Outro"]
+    print("Tipos disponíveis: ", ", ".join(tipos_validos))
+    tipo = input("Tipo do pet: ").strip().capitalize()
+
+    if tipo in tipos_validos:
+            return tipo
+    else:
+        print("Tipo inválido. Tente novamente.")
+        return coletar_tipo_pet()
 
     # Exibindo as informações coletadas
     print("\nInformações do pet:")
