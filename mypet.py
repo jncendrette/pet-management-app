@@ -46,11 +46,14 @@ def coletar_tipo_pet():
         print("Tipo inválido. Tente novamente.")
         return coletar_tipo_pet()
 
-    # Exibindo as informações coletadas
-    print("\nInformações do pet:")
-    print(f"Nome: {nome}")
-    print(f"Idade: {idade} anos")
-    print(f"Peso: {peso} kg")
+def coletar_informacoes_pet():
+    """Função principal que coleta todas as informações sobre o pet."""
+    print("Por favor, insira as informações sobre seu pet.")
+    
+    nome = coletar_nome_pet()
+    idade = coletar_idade_pet()
+    peso = coletar_peso_pet()
+    tipo = coletar_tipo_pet()
 
 # Chama a função para coletar e exibir as informações do pet
 coletar_informacoes_pet()
