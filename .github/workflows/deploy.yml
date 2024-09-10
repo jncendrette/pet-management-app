@@ -28,10 +28,12 @@ jobs:
             echo "${{ secrets.EC2_PRIVATE_KEY }}" > /tmp/ec2-keypair.pem
             chmod 600 /tmp/ec2-keypair.pem
     
-        - name: Deploy no Amazon Linux EC2
+        - name: Configurando credenciais de User
+          env:
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            AWS_REGION: 'us-east-1'
           run: |
-            ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_IP }} << 'EOF'
-            cd /home/ec2-user/app
             
             echo "Instalando o Git"
             sudo yum install git -y
