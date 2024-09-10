@@ -10,7 +10,7 @@ def coletar_nome_pet():
         return coletar_nome_pet()
     return nome
 
-    # Coleta da idade do pet, garantindo que seja um número inteiro
+# Coleta da idade do pet, garantindo que seja um número inteiro
 def coletar_idade_pet():
     while True:
         try:
@@ -22,7 +22,8 @@ def coletar_idade_pet():
         except ValueError:
             print("Por favor, insira um número válido para a idade.")
 
-    # Coleta do peso do pet, garantindo que seja um número flutuante
+# Coleta do peso do pet, garantindo que seja um número flutuante
+def coletar_peso_pet():
     while True:
         try:
             peso = float(input("Peso do pet (em kg): "))
