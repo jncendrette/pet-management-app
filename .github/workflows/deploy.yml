@@ -3,7 +3,7 @@ on: [push]
       #   - 'README.md'
       #   - 'LICENSE.md'
   
-  jobs:
+jobs:
     deploy-to-ec2:
       runs-on: ubuntu-latest
   
